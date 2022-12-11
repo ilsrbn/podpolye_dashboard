@@ -72,7 +72,7 @@ import BaseLayout from '~~/components/baseLayout.vue'
 export default {
   components: { createModal, BaseLayout },
   data: () => ({
-    baseUrl: 'http://localhost:3000/api/admin/post?',
+    baseUrl: 'https://back.podpolye-api.serbin.co/api/admin/post?',
     imageFallback: "https://placehold.co/400",
     posts: [],
     filter: {
@@ -107,7 +107,7 @@ export default {
       const agree = window.confirm("Вы точно хотите удалить это событие?\nЭто событие нельзя отменить!")
       if (!agree) return
       try {
-        await useCustomFetch('http://localhost:3000/api/admin/post/' + item.id, { method: "DELETE" })
+        await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post/' + item.id, { method: "DELETE" })
         this.$router.go()
       } catch(e) {
         console.log({e});

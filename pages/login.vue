@@ -44,7 +44,7 @@ export default {
         payload[key] = this.form[key].value
       }
 
-      const resp = await useCustomFetch('http://localhost:3000/api/auth/login', {method: 'POST', body: payload}).catch((error) => {
+      const resp = await useCustomFetch('https://back.podpolye-api.serbin.co/api/auth/login', {method: 'POST', body: payload}).catch((error) => {
         this.error = error.data.message
       })
 

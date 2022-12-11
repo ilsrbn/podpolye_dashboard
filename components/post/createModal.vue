@@ -27,7 +27,7 @@ export default {
         const formData = new FormData()
         formData.append('file', element)
         formData.append('post_id', post_id)
-        const request = useCustomFetch('http://localhost:3000/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
+        const request = useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
         requests.push(request)
       });
       Promise.all(requests).then(resp => {
@@ -40,7 +40,7 @@ export default {
         payload[key] = this.fields[key].value
       }
       
-      await useCustomFetch('http://localhost:3000/api/admin/post', { method: "POST", body: payload })
+      await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post', { method: "POST", body: payload })
         .catch(e => {
           return console.log(e)
         })

@@ -45,7 +45,7 @@ export default {
     const error = ref(null)
     let event
     try {
-      event = await useCustomFetch("http://localhost:3000/api/admin/post/" + slug)
+      event = await useCustomFetch("https://back.podpolye-api.serbin.co/api/admin/post/" + slug)
       error.value = null
     } catch(e) {
       console.log(e)
@@ -94,13 +94,13 @@ export default {
 
     const handleSubmit = async () => {
       // if (cover.value === -1) return
-      // await useCustomFetch('http://localhost:3000/api/admin/post/cover', { method: "POST", body: { postId: event.id, attachmentId: cover.value } }).then(() => useRouter().push('/'))
+      // await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post/cover', { method: "POST", body: { postId: event.id, attachmentId: cover.value } }).then(() => useRouter().push('/'))
       try {
         const payload = {}
         for (const key in form) {
           payload[key] = form[key].value
         }
-        await useCustomFetch('http://localhost:3000/api/admin/post/' + event.id, { method: "PUT", body: payload })
+        await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post/' + event.id, { method: "PUT", body: payload })
         useRouter().push('/')
         error.value = null
       } catch (e) {
@@ -114,7 +114,7 @@ export default {
       const agree = window.confirm("Вы точно хотите удалить эту фотографию?\nЭто событие нельзя отменить!")
       if (!agree) return
       try {
-        const data = await useCustomFetch('http://localhost:3000/api/admin/attachment/' + photo.id, { method: "DELETE" })
+        const data = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment/' + photo.id, { method: "DELETE" })
         useRouter().go()
       } catch(e) {
         console.log({ e })
@@ -128,7 +128,7 @@ export default {
         const formData = new FormData()
         formData.append('file', photo)
         formData.append('post_id', event.id)
-        const request = useCustomFetch('http://localhost:3000/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
+        const request = useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
         requests.push(request)
       })
       Promise.all(requests).then((resp) => {
