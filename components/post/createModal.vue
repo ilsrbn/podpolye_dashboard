@@ -21,34 +21,34 @@ import { useCustomFetch } from '@/composables/useCustomFetch'
 export default {
   components: { baseForm },
   methods: {
-    handlePhotosUpload(photos, post_id){
+    async handlePhotosUpload(photos, post_id){
       const requests = []
-      photos.forEach(element => {
+      for (let i = 0; i < photos.length; i++) {
+	const element = photos[i]
         const formData = new FormData()
         formData.append('file', element)
         formData.append('post_id', post_id)
-        const request = useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
-        requests.push(request)
-      });
-      Promise.all(requests).then(resp => {
-        console.log(resp);
-      })
+        try {
+          const resp = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
+        } catch (e) {
+          console.log({ e })
+        }
+      }
     },
     async handleSubmit() {
       const payload = {}
       for (const key in this.fields) {  
         payload[key] = this.fields[key].value
       }
-      
-      await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post', { method: "POST", body: payload })
-        .catch(e => {
-          return console.log(e)
-        })
-        .then(resp => {
-          if (!this.photos.files.value.length) return
-          this.handlePhotosUpload(this.photos.files.value, resp.id)
+      try {
+        const {id} = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post', { method: "POST", body: payload })
+        if (this.photos.files.value.length) await this.handlePhotosUpload(this.photos.files.value, id)
+	this.$router.go()
+      } catch(e) {
+        console.log({ e })
+      }
           
-        }).finally(() => this.$router.go())
+        
 
     },
     handleModalOpen(openFuntion) {
