@@ -77,7 +77,7 @@ export default {
       event_date: {
         label: "Дата проведения события",
         type: "date",
-        value: new Date()
+        value: new Date(event.event_date)
       }
     })
 

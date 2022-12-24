@@ -1,4 +1,4 @@
-export const useCustomFetch = (url, options) => {
+export const useCustomFetch = (url, options = {}) => {
 
   return $fetch(url, {
     ...options,
