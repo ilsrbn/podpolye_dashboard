@@ -8,8 +8,7 @@ export default {
 
     async getUser() {
       try {
-        const resp = await useCustomFetch('https://back.podpolye-api.serbin.co/api/hola')
-        console.log(resp);
+        await useCustomFetch('https://back.podpolye-api.serbin.co/api/hola')
       } catch(e) {
         console.log({e});
         if (e.status == 403){

@@ -3,12 +3,15 @@
   <Teleport to="body">
     <div class="modal-mask" v-if="isOpened">
       <div class="modal-wrapper">
-        <v-card v-click-outside="handleClose" class="modal-container" :style="{maxWidth: maxWidth}">
-
-          <v-card-title class="modal-header">
-            <slot name="header">
-            </slot>
-          </v-card-title>
+        <v-card class="modal-container" :style="{maxWidth: maxWidth}">
+          <v-toolbar>
+            <v-toolbar-title class="modal-header">
+              <slot name="header" />
+            </v-toolbar-title>
+            <template #append>
+              <v-btn icon="mdi-close" variant="tonal" @click="handleClose" />
+            </template>
+          </v-toolbar>
 
           <v-card-text class="modal-body">
             <slot name="body">
@@ -68,6 +71,8 @@ export default {
 }
 .modal-container {
   margin-inline: auto;
+  max-height: 90vh;
+  overflow-y: scroll;
 }
 
 .modal-enter {

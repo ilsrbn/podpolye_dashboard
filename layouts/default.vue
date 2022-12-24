@@ -60,6 +60,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-app-bar-title>Подполье | {{ username }}</v-app-bar-title>
       <v-spacer />
+      <v-btn @click="logout">Выйти</v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
@@ -97,9 +98,16 @@ export default {
       },
     }
   },
+  methods: {
+    logout() {
+      useCookie('pauth').value = null
+      window.location.href = 'https://podpolye.org'
+    }
+  },
   computed: {
     username() {
       const user = useState('user')
+      console.log(user)
 
       return user.value?.username || ""
     }
