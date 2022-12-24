@@ -19,7 +19,9 @@
     "cookie-universal-nuxt": "^2.2.2",
     "sass": "^1.56.1",
     "set-cookie-parser": "^2.5.1",
+    "vee-validate": "^4.7.3",
     "vue3-datepicker": "^0.3.4",
-    "vuetify": "^3.0.4"
+    "vuetify": "^3.0.4",
+    "yup": "^0.32.11"
   }
 }

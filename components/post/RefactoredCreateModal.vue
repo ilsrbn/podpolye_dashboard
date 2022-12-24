@@ -7,8 +7,8 @@
       <h3>Добавить событие</h3>
     </template>
     <template #body>
-      <base-form class="mb-5" v-model:fields="fields"/>
-      <base-form v-model:fields="photos"/>
+      <validated-form v-model:schema="fields" />
+      <pre>{{ fields }}</pre>
     </template>
     <template #footer>
       <v-btn @click="handleSubmit" color="blue">Сохранить</v-btn>
@@ -23,16 +23,18 @@
   </v-snackbar>
 </template>
 <script>
-import * as Yup from 'yup';
+import { string } from 'yup';
 import baseForm from '../baseForm.vue'
 import { useCustomFetch } from '@/composables/useCustomFetch'
+import {ValidatedForm} from "#components";
 export default {
-  components: { baseForm },
+  name: "RefactoredCreateModal",
+  components: {ValidatedForm, baseForm },
   methods: {
     async handlePhotosUpload(photos, post_id){
       const requests = []
       for (let i = 0; i < photos.length; i++) {
-	      const element = photos[i]
+        const element = photos[i]
         const formData = new FormData()
         formData.append('file', element)
         formData.append('post_id', post_id)
@@ -48,20 +50,14 @@ export default {
       }
     },
     async handleSubmit() {
-      if (!await this.fields.title.rules.isValid(this.fields.title.value)) {
-        console.log('error')
-        this.snackBar.text = 'Название обязательное поле!'
-        this.snackBar.status = true
-        return
-      }
       const payload = {}
-      for (const key in this.fields) {  
+      for (const key in this.fields) {
         payload[key] = this.fields[key].value
       }
       try {
         const {id} = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post', { method: "POST", body: payload })
         if (this.photos.files.value.length) await this.handlePhotosUpload(this.photos.files.value, id)
-	      this.$router.go()
+        this.$router.go()
       } catch(e) {
         console.log({ e })
         this.snackBar.text = 'Что-то пошло не так'
@@ -77,36 +73,35 @@ export default {
     snackBar: {
       status: false,
       text: null,
-      variant: 'default'
     },
     fields: {
       title: {
         label: "Название",
-        type: "text",
+        as: "v-text-field",
 
-        value: "",
-        rules: Yup.string().required('Название обязательное поле')
+        'v-model': "",
+        rules: string().required('Название обязательное поле')
       },
       description: {
         label: "Описание",
-        type: "textarea",
+        as: "v-textarea",
 
-        value: ""
-      }, 
-      posted: {
-        label: "Статус",
-        type: "radio",
-        options: [
-          { label: "Опубликоно", value: true },
-          { label: "Скрыто", value: false }
-        ],
-        value: true
+        'v-model': ""
       },
-      event_date: {
-        label: "Дата проведения события",
-        type: "date",
-        value: new Date()
-      }
+      // posted: {
+      //   label: "Статус",
+      //   as: "v-radio",
+      //   options: [
+      //     { label: "Опубликоно", value: true },
+      //     { label: "Скрыто", value: false }
+      //   ],
+      //   'v-model': true
+      // },
+      // event_date: {
+      //   label: "Дата проведения события",
+      //   as: "DP",
+      //   'v-model': new Date()
+      // }
     },
     photos: {
       files: {

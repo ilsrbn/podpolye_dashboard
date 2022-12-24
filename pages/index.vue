@@ -19,6 +19,7 @@
           />
           <!-- <v-btn prepend-icon="mdi mdi-filter" color="white" class="mr-4" variant="outline">Фильтр</v-btn> -->
           <create-modal />
+<!--          <RefactoredCreateModal />-->
         </v-col>
       </v-row>
     </v-card-title>
@@ -53,7 +54,7 @@
                 </v-btn>
               </v-col>
               <v-col>
-                <v-btn color="primary" block append-icon="mdi mdi-eye" variant="tonal" :to="'/post/' + event.slug">
+                <v-btn color="primary" block append-icon="mdi mdi-eye" variant="tonal" :to="'/post/' + event.id">
                   Детальнее
                 </v-btn>
               </v-col>
@@ -69,8 +70,9 @@
 import { useCustomFetch } from '~/composables/useCustomFetch'
 import createModal from '~/components/post/createModal.vue'
 import BaseLayout from '~~/components/baseLayout.vue'
+import RefactoredCreateModal from "~/components/post/RefactoredCreateModal.vue";
 export default {
-  components: { createModal, BaseLayout },
+  components: {RefactoredCreateModal, createModal, BaseLayout },
   data: () => ({
     baseUrl: 'https://back.podpolye-api.serbin.co/api/admin/post?',
     imageFallback: "https://placehold.co/400",

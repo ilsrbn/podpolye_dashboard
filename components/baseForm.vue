@@ -1,13 +1,15 @@
 <template>
   <component :is="wrapper">
     <div v-for="(field, key) in fields" :key="field.id">
-      <v-text-field
-        v-if="isTextField(field.type)"
-        :id="key"
-        :type="field.type"
-        :label="field.label"
-        v-model="field.value"
-      />
+
+        <v-text-field
+            v-if="isTextField(field.type)"
+          :id="key"
+          :type="field.type"
+          :label="field.label"
+          v-model="field.value"
+        />
+
       <v-textarea
         v-else-if="field.type === 'textarea'"
         :id="key"
@@ -19,7 +21,7 @@
         :id="key"
         :label="field.label"
         :items="field.options"
-        
+
         item-text="label"
         item-value="value"
         v-model="field.value"
@@ -62,9 +64,9 @@
 
 <script>
 
-
 export default {
   name: "BaseForm",
+
   props: {
     fields: {
       type: Object,
@@ -88,7 +90,7 @@ export default {
 
 <style>
 .dp__theme_dark {
-   
+
    --dp-text-color: rgba(255, 255, 255, 0.44);
    --dp-hover-color: #484848;
    --dp-hover-text-color: #ffffff;
