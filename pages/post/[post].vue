@@ -33,16 +33,28 @@
       </v-expansion-panel>
     </v-expansion-panels>
   </v-card>
+  <v-snackbar
+      :timeout="1500"
+      v-model="snackBar.status"
+  >
+    {{ snackBar.text }}
+
+  </v-snackbar>
 </template>
 <script>
-import { useCustomFetch } from '@/composables/useCustomFetch'
+import {useCustomFetch} from '@/composables/useCustomFetch'
 import baseLayout from '~~/components/baseLayout.vue'
 import BaseForm from '~~/components/baseForm.vue'
+
 export default {
   components: { baseLayout, BaseForm },
   async setup() {
     const slug = useRoute().params.post
     const error = ref(null)
+    const snackBar = reactive({
+      status: false,
+      text: null
+    })
     let event
     try {
       event = await useCustomFetch("https://back.podpolye-api.serbin.co/api/admin/post/" + slug)
@@ -87,14 +99,11 @@ export default {
       cover.value = photo.id
     }
     const compareIds = (photo) => {
-      const isEqual = cover.value === photo.id
-      return isEqual
+      return cover.value === photo.id
     }
 
 
     const handleSubmit = async () => {
-      // if (cover.value === -1) return
-      // await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post/cover', { method: "POST", body: { postId: event.id, attachmentId: cover.value } }).then(() => useRouter().push('/'))
       try {
         const payload = {}
         for (const key in form) {
@@ -114,9 +123,14 @@ export default {
       const agree = window.confirm("Вы точно хотите удалить эту фотографию?\nЭто событие нельзя отменить!")
       if (!agree) return
       try {
-        const data = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment/' + photo.id, { method: "DELETE" })
-        useRouter().go()
+        await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment/' + photo.id, { method: "DELETE" })
+        const photoIndex = photos.findIndex(el => el.id === photo.id)
+        photos.splice(photoIndex, 1)
+        snackBar.text = 'Фото удалено'
+        snackBar.status = true
       } catch(e) {
+        snackBar.text = 'Что-то пошло не так'
+        snackBar.status = true
         console.log({ e })
       }
     }
@@ -141,6 +155,7 @@ export default {
 
     return {
       error,
+      snackBar,
 
       form,
       photos,
