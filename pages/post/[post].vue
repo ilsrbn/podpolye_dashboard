@@ -69,7 +69,7 @@ export default {
         label: "Статус",
         type: "radio",
         options: [
-          { label: "Опубликоно", value: true },
+          { label: "Опубликовано", value: true },
           { label: "Скрыто", value: false }
         ],
         value: event.posted
