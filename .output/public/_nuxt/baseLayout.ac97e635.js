@@ -1,0 +1,1 @@
+import{a as t,o as s,b as o,e as _}from"./entry.864f2e31.js";const a={setup(){}},n={class:"dashboardGrid"};function c(e,d,r,p,u,l){return s(),o("div",n,[_(e.$slots,"default",{},void 0,!0)])}const f=t(a,[["render",c],["__scopeId","data-v-7739e8c6"]]);export{f as default};
