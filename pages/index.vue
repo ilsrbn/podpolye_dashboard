@@ -4,7 +4,7 @@
       <v-row>
         <v-col>События</v-col>
         <v-spacer />
-        <v-col class="d-flex justify-end align-center">
+        <v-col class="d-flex justify-end align-center" cols="5">
           <v-text-field
             v-model="filter.search"
             hide-details

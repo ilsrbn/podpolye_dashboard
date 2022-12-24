@@ -15,10 +15,13 @@
     </template>
   </base-modal>
   <v-snackbar
-      :timeout="1500"
+      vertical
+      :timeout="snackBar.timeout"
       v-model="snackBar.status"
+      multi-line
+      :color="snackBar.variant"
   >
-    {{ snackBar.text }}
+    <div v-html="snackBar.text"></div>
 
   </v-snackbar>
 </template>
@@ -39,6 +42,8 @@ export default {
         try {
           await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/attachment',{ method: "POST", header: { 'Content-Type': 'multipart/form-data' }, body: formData})
           this.snackBar.text = 'Фото загружено'
+          this.snackBar.timeout= 1500
+          this.snackBar.variant = 'success'
           this.snackBar.status = true
         } catch (e) {
           console.log({ e })
@@ -47,20 +52,48 @@ export default {
         }
       }
     },
+    async validate() {
+      const errors = []
+      for (const fieldName in this.fields) {
+        const field = this.fields[fieldName]
+        if (field.rules) {
+          try {
+            await field.rules.validate(field.value)
+          } catch (e) {
+            console.log({e})
+            errors.push(...e.errors)
+          }
+        }
+      }
+      for (const fieldName in this.photos) {
+        const field = this.photos[fieldName]
+        if (field.rules) {
+          try {
+            await field.rules.validate(field.value)
+          } catch (e) {
+            console.log({e})
+            errors.push(...e.errors)
+          }
+        }
+      }
+      return errors
+    },
     async handleSubmit() {
-      if (!await this.fields.title.rules.isValid(this.fields.title.value)) {
-        console.log('error')
-        this.snackBar.text = 'Название обязательное поле!'
+      const errors = await this.validate()
+      if (errors.length) {
+        this.snackBar.timeout = errors.length * 1000
+        this.snackBar.variant = 'error'
+        this.snackBar.text = errors.map((error) => `<p>${error}</p>`).join('')
         this.snackBar.status = true
         return
       }
       const payload = {}
-      for (const key in this.fields) {  
+      for (const key in this.fields) {
         payload[key] = this.fields[key].value
       }
       try {
         const {id} = await useCustomFetch('https://back.podpolye-api.serbin.co/api/admin/post', { method: "POST", body: payload })
-        if (this.photos.files.value.length) await this.handlePhotosUpload(this.photos.files.value, id)
+        await this.handlePhotosUpload(this.photos.files.value, id)
 	      this.$router.go()
       } catch(e) {
         console.log({ e })
@@ -77,6 +110,7 @@ export default {
     snackBar: {
       status: false,
       text: null,
+      timeout: 1500,
       variant: 'default'
     },
     fields: {
@@ -91,7 +125,8 @@ export default {
         label: "Описание",
         type: "textarea",
 
-        value: ""
+        value: "",
+        rules: Yup.string().required('Описание обязательное поле')
       }, 
       posted: {
         label: "Статус",
@@ -113,7 +148,8 @@ export default {
         label: "Фотографии",
         type: "file",
         multiple: true,
-        value: []
+        value: [],
+        rules: Yup.array().min(1, 'Загрузите как минимум 1 фото')
       }
     }
   })
