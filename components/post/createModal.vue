@@ -115,14 +115,14 @@ export default {
     },
     fields: {
       title: {
-        label: "Название",
+        label: "Название*",
         type: "text",
 
         value: "",
         rules: Yup.string().required('Название обязательное поле')
       },
       description: {
-        label: "Описание",
+        label: "Описание*",
         type: "textarea",
 
         value: "",
@@ -132,7 +132,7 @@ export default {
         label: "Статус",
         type: "radio",
         options: [
-          { label: "Опубликоно", value: true },
+          { label: "Опубликовано", value: true },
           { label: "Скрыто", value: false }
         ],
         value: true
@@ -149,7 +149,6 @@ export default {
         type: "file",
         multiple: true,
         value: [],
-        rules: Yup.array().min(1, 'Загрузите как минимум 1 фото')
       }
     }
   })
