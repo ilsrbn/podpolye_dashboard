@@ -1,0 +1,1 @@
+import{a as t,b as s,e as _,o as a}from"./entry.55b50f32.js";const o={},n={class:"page"};function c(e,r){return a(),s("div",n,[_(e.$slots,"default",{},void 0,!0)])}const l=t(o,[["render",c],["__scopeId","data-v-4b97742e"]]);export{l as default};
