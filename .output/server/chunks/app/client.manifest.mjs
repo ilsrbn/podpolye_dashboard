@@ -26,7 +26,7 @@ const client_manifest = {
   "node_modules/nuxt/dist/app/entry.mjs": {
     "resourceType": "script",
     "module": true,
-    "file": "entry.864f2e31.js",
+    "file": "entry.55b50f32.js",
     "src": "node_modules/nuxt/dist/app/entry.mjs",
     "isEntry": true,
     "isDynamicEntry": true,
@@ -72,7 +72,7 @@ const client_manifest = {
   "virtual:nuxt:/ssd/Projects/podpolye_dashboard/.nuxt/error-component.mjs": {
     "resourceType": "script",
     "module": true,
-    "file": "error-component.900797f1.js",
+    "file": "error-component.44d18510.js",
     "src": "virtual:nuxt:/ssd/Projects/podpolye_dashboard/.nuxt/error-component.mjs",
     "isDynamicEntry": true,
     "imports": [
@@ -86,15 +86,15 @@ const client_manifest = {
   "pages/index.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "index.59555961.js",
+    "file": "index.5e2b81da.js",
     "src": "pages/index.vue",
     "isDynamicEntry": true,
     "imports": [
       "components/baseLayout.vue",
-      "_useCustomFetch.448759b2.js",
+      "_useCustomFetch.e4d7d0b1.js",
       "components/baseForm.vue",
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_composables.dfb8c3a4.js"
+      "_composables.069e7a27.js"
     ],
     "dynamicImports": [
       "components/baseForm.vue",
@@ -114,7 +114,7 @@ const client_manifest = {
   "components/baseLayout.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "baseLayout.ac97e635.js",
+    "file": "baseLayout.6c6e740e.js",
     "src": "components/baseLayout.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -128,10 +128,10 @@ const client_manifest = {
     "file": "baseLayout.9e9d2686.css",
     "resourceType": "style"
   },
-  "_useCustomFetch.448759b2.js": {
+  "_useCustomFetch.e4d7d0b1.js": {
     "resourceType": "script",
     "module": true,
-    "file": "useCustomFetch.448759b2.js",
+    "file": "useCustomFetch.e4d7d0b1.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
@@ -139,7 +139,7 @@ const client_manifest = {
   "components/baseForm.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "baseForm.b7a94f41.js",
+    "file": "baseForm.e1dab5a7.js",
     "src": "components/baseForm.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -153,10 +153,10 @@ const client_manifest = {
     "file": "baseForm.707275e7.css",
     "resourceType": "style"
   },
-  "_composables.dfb8c3a4.js": {
+  "_composables.069e7a27.js": {
     "resourceType": "script",
     "module": true,
-    "file": "composables.dfb8c3a4.js",
+    "file": "composables.069e7a27.js",
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
@@ -164,13 +164,13 @@ const client_manifest = {
   "pages/login.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "login.c49ed8ee.js",
+    "file": "login.f88982ab.js",
     "src": "pages/login.vue",
     "isDynamicEntry": true,
     "imports": [
       "components/baseForm.vue",
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_useCustomFetch.448759b2.js"
+      "_useCustomFetch.e4d7d0b1.js"
     ],
     "css": [
       "login.027a362b.css"
@@ -183,20 +183,20 @@ const client_manifest = {
   "pages/post/[post].vue": {
     "resourceType": "script",
     "module": true,
-    "file": "_post_.2668d8c0.js",
+    "file": "_post_.aa1aca58.js",
     "src": "pages/post/[post].vue",
     "isDynamicEntry": true,
     "imports": [
       "components/baseForm.vue",
       "components/baseLayout.vue",
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_useCustomFetch.448759b2.js"
+      "_useCustomFetch.e4d7d0b1.js"
     ]
   },
   "layouts/auth.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "auth.1f529ce9.js",
+    "file": "auth.9db09504.js",
     "src": "layouts/auth.vue",
     "isDynamicEntry": true,
     "imports": [
@@ -213,35 +213,35 @@ const client_manifest = {
   "layouts/default.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "default.3a76f830.js",
+    "file": "default.07113d6d.js",
     "src": "layouts/default.vue",
     "isDynamicEntry": true,
     "imports": [
       "components/useAuth.vue",
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_useCustomFetch.448759b2.js"
+      "_useCustomFetch.e4d7d0b1.js"
     ]
   },
   "components/useAuth.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "useAuth.c914ca29.js",
+    "file": "useAuth.4f3383c1.js",
     "src": "components/useAuth.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_useCustomFetch.448759b2.js",
+      "_useCustomFetch.e4d7d0b1.js",
       "node_modules/nuxt/dist/app/entry.mjs"
     ]
   },
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "error-404.e8dd8d7e.js",
+    "file": "error-404.d930db20.js",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-404.vue",
     "isDynamicEntry": true,
     "imports": [
       "node_modules/nuxt/dist/app/entry.mjs",
-      "_composables.dfb8c3a4.js"
+      "_composables.069e7a27.js"
     ],
     "css": [
       "error-404.23f2309d.css"
@@ -254,11 +254,11 @@ const client_manifest = {
   "node_modules/@nuxt/ui-templates/dist/templates/error-500.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "error-500.77d2f418.js",
+    "file": "error-500.22a5b62c.js",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-500.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_composables.dfb8c3a4.js",
+      "_composables.069e7a27.js",
       "node_modules/nuxt/dist/app/entry.mjs"
     ],
     "css": [
@@ -272,15 +272,15 @@ const client_manifest = {
   "node_modules/@nuxt/ui-templates/dist/templates/welcome.vue": {
     "resourceType": "script",
     "module": true,
-    "file": "welcome.cd872960.js",
+    "file": "welcome.015f01ac.js",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/welcome.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_composables.dfb8c3a4.js",
+      "_composables.069e7a27.js",
       "pages/index.vue",
       "node_modules/nuxt/dist/app/entry.mjs",
       "components/baseLayout.vue",
-      "_useCustomFetch.448759b2.js",
+      "_useCustomFetch.e4d7d0b1.js",
       "components/baseForm.vue"
     ]
   },
@@ -289,30 +289,30 @@ const client_manifest = {
     "file": "error-500.aa16ed4d.css",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-500.css"
   },
-  "pages/login.css": {
+  "layouts/auth.css": {
     "resourceType": "style",
-    "file": "login.027a362b.css",
-    "src": "pages/login.css"
-  },
-  "components/baseLayout.css": {
-    "resourceType": "style",
-    "file": "baseLayout.9e9d2686.css",
-    "src": "components/baseLayout.css"
+    "file": "auth.c45f9b01.css",
+    "src": "layouts/auth.css"
   },
   "components/baseForm.css": {
     "resourceType": "style",
     "file": "baseForm.707275e7.css",
     "src": "components/baseForm.css"
   },
-  "layouts/auth.css": {
+  "components/baseLayout.css": {
     "resourceType": "style",
-    "file": "auth.c45f9b01.css",
-    "src": "layouts/auth.css"
+    "file": "baseLayout.9e9d2686.css",
+    "src": "components/baseLayout.css"
   },
   "node_modules/@nuxt/ui-templates/dist/templates/error-404.css": {
     "resourceType": "style",
     "file": "error-404.23f2309d.css",
     "src": "node_modules/@nuxt/ui-templates/dist/templates/error-404.css"
+  },
+  "pages/login.css": {
+    "resourceType": "style",
+    "file": "login.027a362b.css",
+    "src": "pages/login.css"
   },
   "pages/index.css": {
     "resourceType": "style",
