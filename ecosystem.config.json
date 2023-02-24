@@ -1,0 +1,14 @@
+{
+  "apps": [
+    {
+      "name": "podpolye_dashboard",
+      "exec_mode": "cluster",
+      "instances": "max",
+      "script": "./src/main.ts",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": "3111"
+      }
+    }
+  ]
+}
