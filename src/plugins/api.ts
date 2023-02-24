@@ -11,7 +11,7 @@ export default {
   install: (app: App, config: Config) => {
     const TOKEN = localStorage.getItem(config.tokenName);
     const client = new AppClient({
-      BASE: config.basePath || 'http://localhost:3000',
+      BASE: config.basePath || 'http://localhost:3005',
     });
 
     if (TOKEN) client.request.config.TOKEN = TOKEN;
