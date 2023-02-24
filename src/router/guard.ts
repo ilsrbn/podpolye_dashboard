@@ -4,7 +4,7 @@ export const canAccess = async () => {
   const cookie = localStorage.getItem('authBearer')
   if (!cookie) return false
   try {
-    const resp = await fetch(apiUrl + 'api/auth/profile', {
+    const resp = await fetch(apiUrl + '/api/auth/profile', {
       headers: {
         Authorization: 'Bearer ' + cookie
       }
