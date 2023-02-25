@@ -1,49 +1,51 @@
 <template>
- <n-grid cols="2" x-gap="12" y-gap="12" @keyup.enter="submit">
-   <n-form-item-gi span="2 md:1" label="Title">
-     <n-input placeholder="Title" v-model:value="post.title" />
-   </n-form-item-gi>
-   <n-form-item-gi span="2 md:1" label="Date">
-     <n-date-picker style="width: 100%" placeholder="Event date"  type="datetime" :value="time" @update:value="setTime" />
-   </n-form-item-gi>
-   <n-form-item-gi label="Description" span="2">
-     <n-input type="textarea" placeholder="Description" v-model:value="post.description" />
-   </n-form-item-gi>
-   <n-form-item-gi span="2" label="Status">
-     <n-switch v-model:value="post.posted">
-       <template #checked>
-         Posted
-       </template>
-       <template #unchecked>
-         Hidden
-       </template>
-     </n-switch>
-   </n-form-item-gi>
-   <n-form-item-gi span="4" label="Images (Max: 10)">
-     <n-upload
-         accept="image/*"
-         :max="10"
-         ref="fileUploader"
-         :default-file-list="attachments"
-         list-type="image-card"
-         :default-upload="false"
-         multiple
-         @change="handleUpload"
-         @remove="handleRemove"
-     >
-       Click to Upload
-     </n-upload>
-   </n-form-item-gi>
-   <n-form-item-gi span="2">
-     <n-button type="primary" @click="submit">Submit</n-button>
-   </n-form-item-gi>
- </n-grid>
+  <n-spin :show="loading">
+   <n-grid cols="2" x-gap="12" y-gap="12" @keyup.enter="submit">
+     <n-form-item-gi span="2 md:1" label="Title">
+       <n-input placeholder="Title" v-model:value="post.title" />
+     </n-form-item-gi>
+     <n-form-item-gi span="2 md:1" label="Date">
+       <n-date-picker style="width: 100%" placeholder="Event date"  type="datetime" :value="time" @update:value="setTime" />
+     </n-form-item-gi>
+     <n-form-item-gi label="Description" span="2">
+       <n-input type="textarea" placeholder="Description" v-model:value="post.description" />
+     </n-form-item-gi>
+     <n-form-item-gi span="2" label="Status">
+       <n-switch v-model:value="post.posted">
+         <template #checked>
+           Posted
+         </template>
+         <template #unchecked>
+           Hidden
+         </template>
+       </n-switch>
+     </n-form-item-gi>
+     <n-form-item-gi span="4" label="Images (Max: 10) (Max total files size: 12MB)">
+       <n-upload
+           accept="image/*"
+           :max="10"
+           ref="fileUploader"
+           :default-file-list="attachments"
+           list-type="image-card"
+           :default-upload="false"
+           multiple
+           @change="handleUpload"
+           @remove="handleRemove"
+       >
+         Click to Upload
+       </n-upload>
+     </n-form-item-gi>
+     <n-form-item-gi span="2">
+       <n-button type="primary" @click="submit">Submit</n-button>
+     </n-form-item-gi>
+   </n-grid>
+  </n-spin>
 </template>
 
 <script setup lang="ts">
 import { useApi } from "@/composables/api";
 import { useRoute, useRouter } from "vue-router";
-import {NButton, NDatePicker, NFormItemGi, NGi, NGrid, NInput, NSwitch, NUpload, useMessage} from "naive-ui";
+import {NButton, NDatePicker, NFormItemGi, NGi, NGrid, NInput, NSpin, NSwitch, NUpload, useMessage} from "naive-ui";
 import type { UploadFileInfo } from "naive-ui";
 import {computed, ref} from "vue";
 import {Post} from "@/api";
@@ -54,9 +56,12 @@ const routeId = useRoute().params.id as string
 const router = useRouter()
 const message = useMessage()
 
+const loading = ref<boolean>(true)
+
 type PostForm = Pick<Post, 'title' | 'event_date' | 'description' | 'posted' | 'attachments'>
 
 const post = ref<PostForm>(await api.adminPost.getPostById(routeId))
+loading.value = false
 const attachments = ref<UploadFileInfo[]>(post.value.attachments.map((attachment) => ({
   id: attachment.id.toString(),
   url: attachment.file_url,
@@ -104,6 +109,7 @@ const editPost = async () => {
 }
 
 async function submit() {
+  loading.value = true
   try {
     await removeFiles()
     await uploadFiles()
@@ -114,6 +120,8 @@ async function submit() {
     const err = processError(e)
     if (Array.isArray(err)) err.forEach((error: string) => message.error(error))
     else message.error(err)
+  } finally {
+    loading.value = false
   }
 }
 </script>

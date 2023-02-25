@@ -1,5 +1,6 @@
 <template>
-  <main>
+  <n-spin :show="loading">
+    <main>
     <n-grid cols="12" x-gap="12" y-gap="12" item-responsive responsive="screen">
       <n-gi span="12">
         <create-post />
@@ -60,11 +61,24 @@
       </n-gi>
     </n-grid>
   </main>
+  </n-spin>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import {NButton, NCard, NEllipsis, NGi, NGradientText, NGrid, NIcon, NPopconfirm, NText, useMessage} from "naive-ui";
+import {
+  NButton,
+  NCard,
+  NEllipsis,
+  NGi,
+  NGradientText,
+  NGrid,
+  NIcon,
+  NPopconfirm,
+  NSpin,
+  NText,
+  useMessage
+} from "naive-ui";
 import { View, ViewOff, Delete } from '@vicons/carbon'
 import { useApi } from "@/composables/api";
 import CreatePost from "@/components/create.post.vue";
@@ -76,11 +90,13 @@ import { useDate } from "@/composables/date";
 const router = useRouter()
 const message = useMessage()
 const $api = useApi()
+const loading = ref<boolean>(false)
 const {getRelativeTimeString } = useDate()
 
 const posts = ref<Post[]>(await $api.adminPost.getAllPosts())
 
 const deletePost = (id: number) => {
+  loading.value = true
   try {
     $api.adminPost.deletePostById(id.toString()).then(() => {
       $api.adminPost.getAllPosts().then(resp => {
@@ -93,6 +109,8 @@ const deletePost = (id: number) => {
     const err = processError(e)
     if (Array.isArray(err)) err.forEach((error: string) => message.error(error))
     else message.error(err)
+  } finally {
+    loading.value = false
   }
 }
 </script>
