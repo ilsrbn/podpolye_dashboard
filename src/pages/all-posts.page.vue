@@ -11,8 +11,8 @@
             <img v-if="!post.attachments.length" src="https://via.placeholder.com/150 " alt="Placeholder">
             <img v-else :src="post.attachments[0].file_url" style="max-height: 350px; object-fit: cover" alt="Image">
           </template>
-          <template #header>
-            <n-gradient-text type="info">
+          <template #header >
+            <n-gradient-text type="info" style="overflow: hidden; max-width: 100%">
               {{ post.title }}
             </n-gradient-text>
           </template>
