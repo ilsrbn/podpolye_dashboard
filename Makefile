@@ -9,6 +9,8 @@ DOCKER_COMPOSE_RUN=$(DOCKER_COMPOSE) run --rm
 DOCKER_EXEC_TOOLS_APP=$(CURRENT_USER) docker exec -d -it $(DOCKER_NAME) sh
 NODE_INSTALL="npm i"
 SERVER_RUN="npm run dev"
+SERVER_BUILD="npm run build"
+SERVER_PREVIEW="npm run preview"
 
 #
 # Exec containers
@@ -38,14 +40,24 @@ install:
 	$(DOCKER_EXEC_TOOLS_APP) -c $(NODE_INSTALL)
 
 dev:
+	$(DOCKER_EXEC_TOOLS_APP) -c $(SERVER_BUILD)
+
+app_build:
 	$(DOCKER_EXEC_TOOLS_APP) -c $(SERVER_RUN)
+
+run_preview:
+	$(DOCKER_EXEC_TOOLS_APP) -c $(SERVER_PREVIEW)
 
 up:
 	$(DOCKER_COMPOSE) up -d
 
 start: up dev
 
-first: build install dev
+first: app_build build install dev
+
+first_preview: app_build build install run_preview
+
+preview: up run_preview
 
 stop: $(ROOT_DIR)/docker-compose.yml
 	$(DOCKER_COMPOSE) kill || true

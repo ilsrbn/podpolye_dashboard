@@ -9,6 +9,10 @@ export default defineConfig({
     host: true,
     port: 3111,
   },
+  preview: {
+    host: true,
+    port: 3111,
+  },
   resolve: {
     alias: {
       "@client": fileURLToPath(new URL("./src/api", import.meta.url)),
