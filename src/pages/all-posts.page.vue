@@ -78,12 +78,12 @@ const message = useMessage()
 const $api = useApi()
 const {getRelativeTimeString } = useDate()
 
-const posts = ref<Post[]>(await $api.post.getAllPosts())
+const posts = ref<Post[]>(await $api.adminPost.getAllPosts())
 
 const deletePost = (id: number) => {
   try {
-    $api.post.deletePostById(id.toString()).then(() => {
-      $api.post.getAllPosts().then(resp => {
+    $api.adminPost.deletePostById(id.toString()).then(() => {
+      $api.adminPost.getAllPosts().then(resp => {
         posts.value = resp
         message.info('Post deleted')
       })

@@ -4,7 +4,7 @@
      <n-input placeholder="Title" v-model:value="post.title" />
    </n-form-item-gi>
    <n-form-item-gi span="2 md:1" label="Date">
-     <n-date-picker style="width: 100%" placeholder="Event date" type="datetime" :value="time" @update:value="setTime" />
+     <n-date-picker style="width: 100%" placeholder="Event date"  type="datetime" :value="time" @update:value="setTime" />
    </n-form-item-gi>
    <n-form-item-gi label="Description" span="2">
      <n-input type="textarea" placeholder="Description" v-model:value="post.description" />
@@ -56,7 +56,7 @@ const message = useMessage()
 
 type PostForm = Pick<Post, 'title' | 'event_date' | 'description' | 'posted' | 'attachments'>
 
-const post = ref<PostForm>(await api.post.getPostById(routeId))
+const post = ref<PostForm>(await api.adminPost.getPostById(routeId))
 const attachments = ref<UploadFileInfo[]>(post.value.attachments.map((attachment) => ({
   id: attachment.id.toString(),
   url: attachment.file_url,
@@ -87,20 +87,20 @@ const uploadFiles = async () => {
   blobs.forEach((file) => {
     formData.append('files', file)
   })
-  await api.attachment.attachmentControllerCreate(routeId, { files: blobs })
+  await api.adminAttachment.attachmentControllerCreate(routeId, { files: blobs })
   attachmentsToUpload.value = []
 }
 
 const removeFiles = async () => {
   if (!attachmentsToRemove.value.length) return false
   for (const fileId of attachmentsToRemove.value) {
-    await api.attachment.attachmentControllerRemove(fileId)
+    await api.adminAttachment.attachmentControllerRemove(fileId)
   }
   attachmentsToRemove.value = []
 }
 
 const editPost = async () => {
-  await api.post.editPost(routeId, { posted: post.value.posted, title: post.value.title, description: post.value.description, event_date: post.value.event_date })
+  await api.adminPost.editPost(routeId, { posted: post.value.posted, title: post.value.title, description: post.value.description, event_date: post.value.event_date })
 }
 
 async function submit() {

@@ -8,7 +8,7 @@ import type { Attachment } from './Attachment';
 export type Post = {
     id: number;
     title: string;
-    description: string;
+    description?: string;
     event_date: string;
     owner: Account;
     ownerId: number;

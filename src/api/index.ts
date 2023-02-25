@@ -18,6 +18,7 @@ export type { LoginDto } from './models/LoginDto';
 export type { Post } from './models/Post';
 export type { UpdatePostDto } from './models/UpdatePostDto';
 
-export { AttachmentService } from './services/AttachmentService';
-export { AuthorizationService } from './services/AuthorizationService';
+export { AdminAttachmentService } from './services/AdminAttachmentService';
+export { AdminAuthorizationService } from './services/AdminAuthorizationService';
+export { AdminPostService } from './services/AdminPostService';
 export { PostService } from './services/PostService';

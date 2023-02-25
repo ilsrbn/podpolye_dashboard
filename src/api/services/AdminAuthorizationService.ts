@@ -9,7 +9,7 @@ import type { LoginDto } from '../models/LoginDto';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
-export class AuthorizationService {
+export class AdminAuthorizationService {
 
     constructor(public readonly httpRequest: BaseHttpRequest) {}
 
@@ -24,7 +24,7 @@ export class AuthorizationService {
     ): CancelablePromise<Account> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/api/auth/register',
+            url: '/api/admin/auth/register',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -41,7 +41,7 @@ export class AuthorizationService {
     ): CancelablePromise<AccessTokenDto> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/api/auth/login',
+            url: '/api/admin/auth/login',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -55,7 +55,7 @@ export class AuthorizationService {
     public getLoggedInProfile(): CancelablePromise<Account> {
         return this.httpRequest.request({
             method: 'GET',
-            url: '/api/auth/profile',
+            url: '/api/admin/auth/profile',
         });
     }
 

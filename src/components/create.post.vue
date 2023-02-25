@@ -21,7 +21,7 @@ const $api = useApi()
 
 const createPost = async () => {
   try {
-    const { id } = await $api.post.createPost({})
+    const { id } = await $api.adminPost.createPost({})
     await router.push({ name: 'post', params: { id } })
   } catch (e) {
     const err = processError(e)

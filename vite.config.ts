@@ -6,12 +6,8 @@ import {fileURLToPath, URL} from "node:url";
 export default defineConfig({
   plugins: [vue()],
   server: {
-    proxy: {
-      '/api': {
-        target: 'https://back.podpolye-api.com',
-        changeOrigin: true
-      }
-    }
+    host: true,
+    port: 3111,
   },
   resolve: {
     alias: {

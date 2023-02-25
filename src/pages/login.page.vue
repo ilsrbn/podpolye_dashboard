@@ -1,7 +1,7 @@
 <template>
   <n-layout style="height: 100svh" content-style="padding: 12px">
     <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
-    <n-card style="max-width: 560px; margin-inline: auto" @keyup.enter="login">
+    <n-card style="max-width: 560px; margin-inline: auto" @keyup.enter.prevent="login">
       <template #header>Login</template>
       <n-grid cols="1" y-gap="24">
         <n-gi>
@@ -38,7 +38,8 @@ const form = ref<LoginDto>({
 
 async function login() {
   try {
-    const { access_token } =await api.authorization.login(form.value)
+    debugger
+    const { access_token } = await api.adminAuthorization.login(form.value)
     api.request.config.TOKEN = access_token
     localStorage.setItem('authBearer', access_token)
     await router.push({ name: 'posts' })

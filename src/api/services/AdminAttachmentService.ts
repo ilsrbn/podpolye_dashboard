@@ -4,7 +4,7 @@
 import type { CancelablePromise } from '../core/CancelablePromise';
 import type { BaseHttpRequest } from '../core/BaseHttpRequest';
 
-export class AttachmentService {
+export class AdminAttachmentService {
 
     constructor(public readonly httpRequest: BaseHttpRequest) {}
 
@@ -22,7 +22,7 @@ export class AttachmentService {
     ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'POST',
-            url: '/api/attachment/post/{id}',
+            url: '/api/admin/attachment/post/{id}',
             path: {
                 'id': id,
             },
@@ -33,15 +33,15 @@ export class AttachmentService {
 
     /**
      * @param id
-     * @returns string
+     * @returns any
      * @throws ApiError
      */
     public attachmentControllerRemove(
         id: string,
-    ): CancelablePromise<string> {
+    ): CancelablePromise<any> {
         return this.httpRequest.request({
             method: 'DELETE',
-            url: '/api/attachment/{id}',
+            url: '/api/admin/attachment/{id}',
             path: {
                 'id': id,
             },

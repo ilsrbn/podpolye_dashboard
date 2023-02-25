@@ -5,16 +5,18 @@ import type { BaseHttpRequest } from './core/BaseHttpRequest';
 import type { OpenAPIConfig } from './core/OpenAPI';
 import { AxiosHttpRequest } from './core/AxiosHttpRequest';
 
-import { AttachmentService } from './services/AttachmentService';
-import { AuthorizationService } from './services/AuthorizationService';
+import { AdminAttachmentService } from './services/AdminAttachmentService';
+import { AdminAuthorizationService } from './services/AdminAuthorizationService';
+import { AdminPostService } from './services/AdminPostService';
 import { PostService } from './services/PostService';
 
 type HttpRequestConstructor = new (config: OpenAPIConfig) => BaseHttpRequest;
 
 export class ApiClient {
 
-    public readonly attachment: AttachmentService;
-    public readonly authorization: AuthorizationService;
+    public readonly adminAttachment: AdminAttachmentService;
+    public readonly adminAuthorization: AdminAuthorizationService;
+    public readonly adminPost: AdminPostService;
     public readonly post: PostService;
 
     public readonly request: BaseHttpRequest;
@@ -32,8 +34,9 @@ export class ApiClient {
             ENCODE_PATH: config?.ENCODE_PATH,
         });
 
-        this.attachment = new AttachmentService(this.request);
-        this.authorization = new AuthorizationService(this.request);
+        this.adminAttachment = new AdminAttachmentService(this.request);
+        this.adminAuthorization = new AdminAuthorizationService(this.request);
+        this.adminPost = new AdminPostService(this.request);
         this.post = new PostService(this.request);
     }
 }
